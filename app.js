@@ -1,8 +1,17 @@
 import { Hono } from "https://deno.land/x/hono@v3.12.11/mod.ts";
-import * as login from "./routes/login.js";
 
 const app = new Hono();
 
-app.get("/login", login.showLoginForm);
+app.get('/register', async (c) => {
+    return c.html(await Deno.readTextFile('./views/register.html'));
+});
+
+app.get('/login', async (c) => {
+    return c.html(await Deno.readTextFile('./views/login.html'));
+});
+
+app.get('/index', async (c) => {
+    return c.html(await Deno.readTextFile('./views/index.html'));
+});
 
 Deno.serve(app.fetch);
